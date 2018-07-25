@@ -121,13 +121,14 @@
     
     CGFloat width;
     CGFloat height;
-    if ((self.view.frame.size.width-30)*1.5+120<=crfd_h) {
-        width=(self.view.frame.size.width-30);
-        height=(self.view.frame.size.width-30)*1.5+120;
+    if ((self.view.frame.size.width-10)*1.5+120<=crfd_h) {
+//        width=(self.view.frame.size.width-10);
+        height=(self.view.frame.size.width-10)*1.5+120;
     }else{
-        width=(crfd_h-120)/1.5;
+//        width=(crfd_h-100)/1.5;
         height=crfd_h;
     }
+    width = dzScreen_width - 20;
     
     for (int i = 0; i<CARD_NUM; i++) {
         JLDragCardView *draggableView = [[JLDragCardView alloc]initWithFrame:CGRectMake([[UIScreen mainScreen]bounds].size.width+CARD_WIDTH, 10, width, height)];
