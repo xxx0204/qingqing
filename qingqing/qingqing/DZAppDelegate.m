@@ -50,7 +50,7 @@
         [NSString addFirstStart];
 //    });
 
-    [[RCIM sharedRCIM] initWithAppKey:@"mgb7ka1nmwbdg"];
+    [[RCIM sharedRCIM] initWithAppKey:@"z3v5yqkbz1ry0"];
     [[RCIM sharedRCIM] setUserInfoDataSource:self];
     [[RCIM sharedRCIM] setGroupInfoDataSource:self];
     [[RCIM sharedRCIM] setReceiveMessageDelegate:self];
@@ -342,7 +342,7 @@
 - (void)timerAction{
     //定时器也是在子线程中执行的
     if (![NSThread isMainThread]){
-        NSLog(@"定时器");
+//        NSLog(@"定时器");
         if ([NSObject isWhetherData]) {
             NSDictionary *dict=[NSObject upReadLike];
             [DZNetwork post_ph:post_upLikeAndUnLike np:@{@"likeAccountIds":dict[@"like"],@"dontLikeAccountIds":dict[@"unLike"]} class:nil success:^(id data) {
@@ -351,9 +351,9 @@
                 }else{
                     [NSObject failureLike];
                 }
-                NSLog(@"%@",data);
+//                NSLog(@"%@",data);
             } failure:^(NSError *error) {
-                NSLog(@"%@",error);
+//                NSLog(@"%@",error);
                 [NSObject failureLike];
             }];
         }

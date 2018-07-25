@@ -34,6 +34,7 @@
 #define post_submitFeedback @"submitFeedback"//提交意见反馈
 #define post_setShieldPhone @"setShieldPhone"//设置屏蔽通讯录
 #define post_deletePicture @"deletePicture"//删除图片
+#define post_deleteRelation @"deleteRelation"//灰色时删除关系
 /** 请求成功的Block */
 typedef void(^RequestSuccess)(id data);
 

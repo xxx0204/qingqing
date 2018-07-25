@@ -270,10 +270,10 @@
             if (data.resultCode==0) {
                 DZPopUpScrollViewController *dz_PFI_VC=[[DZPopUpScrollViewController alloc] initWithFrame:CGRectMake(0, 0, dzScreen_width, dzScreen_height) array:[data.otherAccountList mutableCopy] styleType:(StyleTypeExpire)];
                 dz_PFI_VC.deleteBlock = ^(NSInteger accountId) {
-                    NSLog(@"%ld=%@",(long)accountId,weakself.friendListM.likeMeList);
-                    for (DZGMModel *model in weakself.friendListM.likeMeList) {
+                    NSLog(@"%ld=%@",(long)accountId,weakself.friendListM.matchExpireList);
+                    for (DZGMModel *model in weakself.friendListM.matchExpireList) {
                         if (accountId==model.accountId) {
-                            [weakself.friendListM.likeMeList removeObject:model];
+//                            [weakself.friendListM.matchExpireList removeObject:model];
                             break;
                         }
                     }

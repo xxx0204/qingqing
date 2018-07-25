@@ -173,7 +173,11 @@ static inline float lengthFit(float iphone6PlusLength)
     [self.potoNumBtn setTitle:[NSString stringWithFormat:@" %ld",(long)self.homeListM.picCount] forState:UIControlStateNormal];
 //    self.nameLabel.text = [NSString stringWithFormat:@"郑爽 %@号 ",self.infoDict[@"number"]];
 //    self.headerImageView.image = [UIImage imageNamed:self.infoDict[@"image"]];
-    [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:[NSString picUrlPath:self.homeListM.headPicUrl]] placeholderImage:dzImageNamed(@"default_head")];
+    NSString *imgUrl = [NSString picUrlPath:self.homeListM.headPicUrl];
+    imgUrl = [imgUrl stringByReplacingOccurrencesOfString:@".jpeg" withString:@"_long.jpeg"];
+    imgUrl = [imgUrl stringByReplacingOccurrencesOfString:@".jpg" withString:@"_long.jpg"];
+    imgUrl = [imgUrl stringByReplacingOccurrencesOfString:@".png" withString:@"_long.png"];
+    [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:imgUrl] placeholderImage:dzImageNamed(@"default_head")];
     if (self.homeListM.profession.length==0) {
         self.alertLabel.text =[NSString getNullStr:self.homeListM.city];//@"学生 北京";
     }else{

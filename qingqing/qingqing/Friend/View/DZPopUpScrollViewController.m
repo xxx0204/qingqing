@@ -86,7 +86,11 @@
             UIImageView *iconImageV=[[UIImageView alloc] init];
             iconImageV.frame=CGRectMake(10+j*((imageV.width-30)/3+5), 15, (imageV.width-30)/3, (imageV.width-30)/3*630/378);
             iconImageV.layer.cornerRadius=5;
-            [iconImageV sd_setImageWithURL:[NSURL URLWithString:accountM.pictureUrlList[j]] placeholderImage:dzImageNamed(@"headIcon")];
+            NSString *imgUrl = [NSString picUrlPath:accountM.pictureUrlList[j]];
+            imgUrl = [imgUrl stringByReplacingOccurrencesOfString:@".jpeg" withString:@"_long.jpeg"];
+            imgUrl = [imgUrl stringByReplacingOccurrencesOfString:@".jpg" withString:@"_long.jpg"];
+            imgUrl = [imgUrl stringByReplacingOccurrencesOfString:@".png" withString:@"_long.png"];
+            [iconImageV sd_setImageWithURL:[NSURL URLWithString:imgUrl] placeholderImage:dzImageNamed(@"headIcon")];
             iconImageV.backgroundColor=[UIColor yellowColor];
             [imageV addSubview:iconImageV];
         }
@@ -183,30 +187,69 @@
         }
     }
     if (btn.tag==201||btn.tag==202) {
-        NSLog(@"%ld",(long)_pageI);
-        NSArray *likeArr=@[];
-        NSArray *unLikeArr=@[];
-        DZAccountModel *model=self.dataArray[_pageI];
-        if (btn.tag==201) {
-            unLikeArr=@[@(model.id)];
-        }else{
-            likeArr=@[@(model.id)];
-        }
-        dzWeakSelf(self);
-        [DZNetwork post_ph:post_upLikeAndUnLike np:@{@"likeAccountIds":likeArr,@"dontLikeAccountIds":unLikeArr} class:nil success:^(id data) {
-            if ([data[@"resultCode"] integerValue]==0) {
-                [weakself.dataArray removeObject:model];
-                weakself.deleteBlock(model.id);
-                if (weakself.dataArray.count!=0) {
-                    [weakself initV:_styleType];
-                }else{
-                    [weakself deleteIscelect];
-                }
+        if (_styleType == StyleTypeDefault) {
+            NSLog(@"%ld",(long)_pageI);
+            NSArray *likeArr=@[];
+            NSArray *unLikeArr=@[];
+            DZAccountModel *model=self.dataArray[_pageI];
+            if (btn.tag==201) {
+                unLikeArr=@[@(model.id)];
+            }else{
+                likeArr=@[@(model.id)];
             }
-            NSLog(@"%@",data);
-        } failure:^(NSError *error) {
-            NSLog(@"%@",error);
-        }];
+            dzWeakSelf(self);
+            [DZNetwork post_ph:post_upLikeAndUnLike np:@{@"likeAccountIds":likeArr,@"dontLikeAccountIds":unLikeArr} class:nil success:^(id data) {
+                if ([data[@"resultCode"] integerValue]==0) {
+                    [weakself.dataArray removeObject:model];
+                    weakself.deleteBlock(model.id);
+                    if (weakself.dataArray.count!=0) {
+                        [weakself initV:_styleType];
+                    }else{
+                        [weakself deleteIscelect];
+                    }
+                }
+                NSLog(@"%@",data);
+            } failure:^(NSError *error) {
+                NSLog(@"%@",error);
+            }];
+        } else {
+            NSLog(@"%ld", btn.tag);
+            if (btn.tag == 201) {
+                DZAccountModel *model=self.dataArray[_pageI];
+                dzWeakSelf(self);
+                [DZNetwork post_ph:post_deleteRelation np:@{@"relationAccountId":@(model.id)} class:nil success:^(id data) {
+                    if ([data[@"resultCode"] integerValue]==0) {
+                        [weakself.dataArray removeObject:model];
+                        weakself.deleteBlock(model.id);
+                        if (weakself.dataArray.count!=0) {
+                            [weakself initV:_styleType];
+                        }else{
+                            [weakself deleteIscelect];
+                        }
+                    }
+                    NSLog(@"%@",data);
+                } failure:^(NSError *error) {
+                    NSLog(@"%@",error);
+                }];
+            } else {
+                DZAccountModel *model=self.dataArray[_pageI];
+                dzWeakSelf(self);
+                [DZNetwork post_ph:post_applyExtension np:@{@"matchAccountId":@(model.id)} class:nil success:^(id data) {
+                    if ([data[@"resultCode"] integerValue]==0) {
+                        [weakself.dataArray removeObject:model];
+                        weakself.deleteBlock(model.id);
+                        if (weakself.dataArray.count!=0) {
+                            [weakself initV:_styleType];
+                        }else{
+                            [weakself deleteIscelect];
+                        }
+                    }
+                    NSLog(@"%@",data);
+                } failure:^(NSError *error) {
+                    NSLog(@"%@",error);
+                }];
+            }
+        }
     }
 }
 -(void)closeBtnClick{
