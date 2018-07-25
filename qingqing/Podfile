@@ -1,0 +1,23 @@
+platform:ios,'8.0'
+#use_frameworks!
+def pods
+pod 'FMDB', '~> 2.7.2'
+pod 'RongCloudIM/IMLib', '~> 2.9.1'
+pod 'RongCloudIM/IMKit', '~> 2.9.1'
+pod 'YBPopupMenu', '~> 1.1.2'
+pod 'MJRefresh', '~> 3.1.12'
+pod 'TPKeyboardAvoiding', '~> 1.3.1'
+pod 'AFNetworking', '~> 3.1’
+pod 'SDWebImage', '~> 4.0.0'
+pod 'MJExtension', '~> 3.0.13'
+pod 'SDCycleScrollView', '~> 1.73'
+pod 'TTRangeSlider', '~> 1.0.5'
+pod 'Masonry'
+pod 'UMCCommon'
+pod 'UMCSecurityPlugins'
+pod 'UMCCommonLog'
+pod 'UMCAnalytics'
+end
+target 'qingqing' do
+pods
+end

@@ -1,0 +1,98 @@
+//
+//  qingqing-Prefix.pch
+//  qingqing
+//
+//  Created by Gavin on 2018/4/25.
+//  Copyright © 2018年 ShenZhen GaoShengTong Computer software development Co., LTD. All rights reserved.
+//
+
+#ifndef qingqing_Prefix_pch
+#define qingqing_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import "UIView+YYAdd.h"
+#import "DZNetWork.h"
+#import <UIImageView+WebCache.h>
+#import <UIButton+WebCache.h>
+#import "CustomDialogView.h"
+#import "NSString+DZInfo.h"
+#import "DZObjectToDicTionary.h"
+#import "EasyShowView.h"
+#import <objc/runtime.h>
+#import "Masonry.h"
+
+//状态栏高度
+#define dzStatusBarH ([UIApplication sharedApplication].statusBarFrame.size.height)
+//导航栏高度
+#define dzNavigationBarH (dzStatusBarH + 44)
+
+//获取项目版本
+#define dzVersion [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
+
+/**
+ *  文字大小设置
+ */
+#define dzFont(size) [UIFont systemFontOfSize:size]
+//#define dzFont(size) dzScreen_width<350 ? [UIFont systemFontOfSize:size-3]:[UIFont systemFontOfSize:size]
+#define dzHelvetica_bold(s) [UIFont fontWithName:@"Helvetica-Bold" size:s]
+
+/**
+ *  设备屏幕宽、高
+ */
+#define dzScreen_width  [UIScreen mainScreen].bounds.size.width
+#define dzScreen_height [UIScreen mainScreen].bounds.size.height
+#define dzW(w) dzScreen_width*w/750
+#define dzH(h) dzScreen_height*h/1334
+#define CGRectSetX(rect, x) rect = CGRectMake(x, rect.origin.y, rect.size.width, rect.size.height)
+#define CGRectSetY(rect, y) rect = CGRectMake(rect.origin.x, y, rect.size.width, rect.size.height)
+#define CGRectSetWidth(rect, w) rect = CGRectMake(rect.origin.x, rect.origin.y, w, rect.size.height)
+#define CGRectSetHeight(rect, h) rect = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, h)
+/**
+ *  定义UIImage对象
+ */
+#define dzImageNamed(image) [UIImage imageNamed:image]
+/**
+ *弱引用、强引用
+ */
+#define dzWeakSelf(type)  __weak typeof(type) weak##type = type
+#define dzStrongSelf(type)  __strong typeof(type) type = weak##type
+
+#define dzRGBA(R,G,B,A)  [UIColor colorWithRed:(float)R/255.0f green:(float)G/255.0f blue:(float)B/255.0f alpha:A]
+#define dzRgba(r,g,b,a) [UIColor colorWithRed:(float)r green:(float)g blue:(float)b alpha:a]
+//16 进制色值转换 DZColorFromRGB(0xffffff);
+#define DZColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+
+#define encodeRuntime(A) \
+\
+unsigned int count = 0;\
+Ivar *ivars = class_copyIvarList([A class], &count);\
+for (int i = 0; i<count; i++) {\
+Ivar ivar = ivars[i];\
+const char *name = ivar_getName(ivar);\
+NSString *key = [NSString stringWithUTF8String:name];\
+id value = [self valueForKey:key];\
+[encoder encodeObject:value forKey:key];\
+}\
+free(ivars);\
+
+#define initCoderRuntime(A) \
+\
+if (self = [super init]) {\
+unsigned int count = 0;\
+Ivar *ivars = class_copyIvarList([A class], &count);\
+for (int i = 0; i<count; i++) {\
+Ivar ivar = ivars[i];\
+const char *name = ivar_getName(ivar);\
+NSString *key = [NSString stringWithUTF8String:name];\
+id value = [decoder decodeObjectForKey:key];\
+[self setValue:value forKey:key];\
+}\
+free(ivars);\
+}\
+return self;\
+\
+
+
+#endif /* qingqing_Prefix_pch */
