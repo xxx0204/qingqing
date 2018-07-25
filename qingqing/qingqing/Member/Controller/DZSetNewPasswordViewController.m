@@ -81,6 +81,17 @@
         _hintBtn.selected=NO;
         return;
     }
+    if (tf1.text.length!=0 && tf2.text.length>20) {
+        tf2.text = [tf2.text substringToIndex:20];
+        [EasyTextView showText:@"密码长度为6—20个字符" config:^EasyTextConfig *{
+            EasyTextConfig *config = [EasyTextConfig shared];
+            config.bgColor = [UIColor lightGrayColor];
+            config.shadowColor = [UIColor clearColor];
+            config.animationType = TextAnimationTypeFade;
+            config.statusType = TextStatusTypeBottom;
+            return config;
+        }];
+    }
     _hintBtn.enabled=YES;
     _hintBtn.selected=YES;
 }

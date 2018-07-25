@@ -109,7 +109,20 @@
     }
     dzWeakSelf(self);
     cell.nicknameBlock = ^(NSString *desS) {
-        weakself.nicknameS=desS;
+        if (!(desS.length > 20)) {
+            weakself.nicknameS=desS;
+        } else {
+            weakself.nicknameS=[desS substringToIndex:20];
+            [tableView reloadData];
+            [EasyTextView showText:@"昵称长度不能超过20个字符" config:^EasyTextConfig *{
+                EasyTextConfig *config = [EasyTextConfig shared];
+                config.bgColor = [UIColor lightGrayColor];
+                config.shadowColor = [UIColor clearColor];
+                config.animationType = TextAnimationTypeFade;
+                config.statusType = TextStatusTypeMidden;
+                return config;
+            }];
+        }
     };
     return cell;
 }

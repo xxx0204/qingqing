@@ -166,7 +166,7 @@
     if (!_stirngLenghLabel) {
         _stirngLenghLabel=[[UILabel alloc]init];
         _stirngLenghLabel.frame=CGRectMake(self.textV.width-60,self.textV.height-25,60, 20);
-        _stirngLenghLabel.text=[NSString stringWithFormat:@"0/%ld",(long)self.lengthS];
+        _stirngLenghLabel.text=[NSString stringWithFormat:@"%ld/%ld",(long)_textS?_textS.length:0, (long)self.lengthS];
         _stirngLenghLabel.font=dzFont(13);
         _stirngLenghLabel.userInteractionEnabled = NO;
         if (self.lengthS==0) {

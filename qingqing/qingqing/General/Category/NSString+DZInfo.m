@@ -315,7 +315,7 @@
     NSDateFormatter* toformatter = [[NSDateFormatter alloc] init];
     [toformatter setDateStyle:NSDateFormatterMediumStyle];
     [toformatter setTimeStyle:NSDateFormatterShortStyle];
-    [toformatter setDateFormat:@"dd/MM/yyyy"];//设置目标时间字符串的格式
+    [toformatter setDateFormat:@"yyyy/MM/dd"];//设置目标时间字符串的格式
     NSString *targetTime = [toformatter stringFromDate:date];
     return  [NSString getNullStr:targetTime];
 }
