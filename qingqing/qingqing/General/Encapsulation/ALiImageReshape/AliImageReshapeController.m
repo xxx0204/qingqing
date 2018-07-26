@@ -34,6 +34,19 @@
 
 - (void)selectDidClick
 {
+    UIImage *resImage = self.shapeImage;
+    
+    
+    NSData *data = UIImagePNGRepresentation(resImage);
+    if (!data) {
+        data = UIImageJPEGRepresentation(resImage, 0.5);//需要改成0.5才接近原图片大小，原因请看下文
+    }
+    double dataLength = [data length] * 1.0;
+    if (!(dataLength > 102400)) {
+        [EasyTextView showText:@"上传的图片不能小于100KB"];
+        return ;
+    }
+    
     if ([self.delegate respondsToSelector:@selector(imageReshaperController:didFinishPickingMediaWithInfo:)]) {
         [self.delegate imageReshaperController:self didFinishPickingMediaWithInfo:self.shapeImage];
     }

@@ -658,7 +658,7 @@
         _headScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, dzScreen_width,dzScreen_width) delegate:self placeholderImage:dzImageNamed(@"banner_default")];
         _headScrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
         _headScrollView.backgroundColor=[UIColor whiteColor];
-        _headScrollView.bannerImageViewContentMode=UIViewContentModeScaleAspectFill;
+        _headScrollView.bannerImageViewContentMode=UIViewContentModeScaleToFill;
         _headScrollView.imageURLStringsGroup =self.accounModel.pictureUrlList; //@[@"",@"",@"",@""];
     }
     return _headScrollView;
