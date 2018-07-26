@@ -598,24 +598,41 @@
     if (isEdit) {
         for (int i=0; i<6; i++) {
             UIButton *imageBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+UIImageView *imageView = [[UIImageView alloc] init];
             imageBtn.backgroundColor=DZColorFromRGB(0xEBEBEB);
+            imageView.backgroundColor = DZColorFromRGB(0xEBEBEB);
             imageBtn.tag=2000+i;
+            imageView.tag = 2000+i;
             [imageBtn addTarget:self action:@selector(headBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-            imageBtn.imageView.contentMode=UIViewContentModeScaleAspectFill;
+            imageView.userInteractionEnabled = YES;
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(headBtnClick:)];
+            [imageView addGestureRecognizer:tap];
+            imageBtn.imageView.contentMode= UIViewContentModeScaleAspectFill;
+            imageView.contentMode =         UIViewContentModeScaleAspectFit;
             if (i==0) {
                 imageBtn.frame=CGRectMake(0, 0, headV.width*2/3-2, headV.height*2/3-2);
+                imageView.frame = CGRectMake(0, 0, headV.width*2/3-2, headV.height*2/3-2);
             }else if (i<3){
                 imageBtn.frame=CGRectMake(headV.width*2/3, (i-1)*headV.width*1/3, headV.width*1/3, headV.height*1/3-2);
+                imageView.frame=CGRectMake(headV.width*2/3, (i-1)*headV.width*1/3, headV.width*1/3, headV.height*1/3-2);
             }else if (i<5){
                 imageBtn.frame=CGRectMake((i-3)*headV.width*1/3,headV.height*2/3, headV.width*1/3-2, headV.height*1/3);
+                imageView.frame=CGRectMake((i-3)*headV.width*1/3,headV.height*2/3, headV.width*1/3-2, headV.height*1/3);
             }else{
                 imageBtn.frame=CGRectMake((i-3)*headV.width*1/3,headV.height*2/3, headV.width*1/3, headV.height*1/3);
+                imageView.frame=CGRectMake((i-3)*headV.width*1/3,headV.height*2/3, headV.width*1/3, headV.height*1/3);
             }
             if (self.accounModel.pictureUrlList.count>=i+1) {
-                [imageBtn sd_setImageWithURL:[NSURL URLWithString:[NSString picUrlPath:self.accounModel.pictureUrlList[i]]] forState:UIControlStateNormal placeholderImage:dzImageNamed(@"default_head")];
+//                [imageBtn sd_setImageWithURL:[NSURL URLWithString:[NSString picUrlPath:self.accounModel.pictureUrlList[i]]] forState:UIControlStateNormal placeholderImage:dzImageNamed(@"default_head")];
+                [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString picUrlPath:self.accounModel.pictureUrlList[i]]] placeholderImage:dzImageNamed(@"default_head")];
+                imageBtn.backgroundColor = UIColor.clearColor;
+                imageView.hidden = NO;
             }else{
                 [imageBtn setImage:dzImageNamed(@"btn_add") forState:UIControlStateNormal];
+                imageView.hidden = YES;
+//                imageView.image = dzImageNamed(@"btn_add");
             }
+            [headV addSubview:imageView];
             [headV addSubview:imageBtn];
             if (i<self.accounModel.pictureUrlList.count) {
                 UIButton *deleteBtn=[UIButton buttonWithType:UIButtonTypeCustom];

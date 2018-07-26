@@ -332,7 +332,7 @@
         //  [[NSRunLoop currentRunLoop] run];//已经将nstimer添加到NSRunloop中了
         //第2种方式
         //此种方式创建的timer没有添加至runloop中
-        NSTimer *timer = [NSTimer timerWithTimeInterval:10.0f target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
+        NSTimer *timer = [NSTimer timerWithTimeInterval:30.0f target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
         //将定时器添加到runloop中
         [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
         [[NSRunLoop currentRunLoop] run];
@@ -342,10 +342,10 @@
 - (void)timerAction{
     //定时器也是在子线程中执行的
     if (![NSThread isMainThread]){
-//        NSLog(@"定时器");
+        NSLog(@"定时器");
         if ([NSObject isWhetherData]) {
             NSDictionary *dict=[NSObject upReadLike];
-            [DZNetwork post_ph:post_upLikeAndUnLike np:@{@"likeAccountIds":dict[@"like"],@"dontLikeAccountIds":dict[@"unLike"]} class:nil success:^(id data) {
+            [DZNetwork post_ph:post_upLikeAndUnLike np:@{@"matchPushType":@(0),@"likeAccountIds":dict[@"like"],@"dontLikeAccountIds":dict[@"unLike"]} class:nil success:^(id data) {
                 if ([data[@"resultCode"] integerValue]==0) {
                     [NSObject deleteLike];
                 }else{

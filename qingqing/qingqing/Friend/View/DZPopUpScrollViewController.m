@@ -198,7 +198,7 @@
                 likeArr=@[@(model.id)];
             }
             dzWeakSelf(self);
-            [DZNetwork post_ph:post_upLikeAndUnLike np:@{@"likeAccountIds":likeArr,@"dontLikeAccountIds":unLikeArr} class:nil success:^(id data) {
+            [DZNetwork post_ph:post_upLikeAndUnLike np:@{@"matchPushType":@(1),@"likeAccountIds":likeArr,@"dontLikeAccountIds":unLikeArr} class:nil success:^(id data) {
                 if ([data[@"resultCode"] integerValue]==0) {
                     [weakself.dataArray removeObject:model];
                     weakself.deleteBlock(model.id);
