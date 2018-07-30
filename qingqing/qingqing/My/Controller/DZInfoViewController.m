@@ -19,11 +19,12 @@
 #import "DZFAQsTwoViewController.h"
 #import "AliImageReshapeController.h"
 #import <SDCycleScrollView.h>
+#import "WXActionSheet.h"
 //定位
 #import "SYCLLocation.h"
 #import "CityListViewController.h"
 
-@interface DZInfoViewController ()<UITableViewDelegate,UITableViewDataSource,ALiImageReshapeDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,SDCycleScrollViewDelegate,CityListViewDelegate>
+@interface DZInfoViewController ()<UITableViewDelegate,UITableViewDataSource,ALiImageReshapeDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,SDCycleScrollViewDelegate,CityListViewDelegate, WXActionSheetDelegate, UIActionSheetDelegate>
 @property(nonatomic,strong)UITableView *tableV;
 @property(nonatomic,strong)NSMutableArray *infoArray, *labelArray,*interestArray,*FAQsArray;
 @property(nonatomic,strong)DZOtherAccounModel *accounModel;
@@ -652,24 +653,36 @@ UIImageView *imageView = [[UIImageView alloc] init];
     [self.tableV reloadData];
 }
 -(void)deleteClickBtn:(UIButton *)btn{
-    dzWeakSelf(self);
-    [DZNetwork post_ph:post_deletePicture np:@{@"url":[NSString getNullStr:self.accounModel.pictureUrlList[btn.tag]]} class:nil success:^(id data) {
-        if ([data[@"resultCode"] integerValue]==0) {
-            [weakself.accounModel.pictureUrlList removeObjectAtIndex:btn.tag];
-            [weakself refreshViewIsEdit:weakself.isEdit];
-            if (weakself.accounModel.pictureUrlList.count==1) {
-                [NSString modifyMemberType:3 value:[NSString getNullStr:weakself.accounModel.pictureUrlList[0]]];
-            }
-        }else{
-            [DZNetwork hintNetwork:data[@"desc"]];
-            if (weakself.accounModel.pictureUrlList.count==1) {
-                [NSString modifyMemberType:3 value:[NSString getNullStr:weakself.accounModel.pictureUrlList[0]]];
-            }
-        }
-    } failure:^(NSError *error) {
-        NSLog(@"%@",error);
-    }];
+    WXActionSheet * sheet = [[WXActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除该照片" otherButtonTitles:nil];
+    sheet.tag = btn.tag;
+    [sheet showInView:self.view];
 }
+
+- (void)actionSheet:(WXActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        dzWeakSelf(self);
+        [DZNetwork post_ph:post_deletePicture np:@{@"url":[NSString getNullStr:self.accounModel.pictureUrlList[actionSheet.tag]]} class:nil success:^(id data) {
+            if ([data[@"resultCode"] integerValue]==0) {
+                [weakself.accounModel.pictureUrlList removeObjectAtIndex:actionSheet.tag];
+                [weakself refreshViewIsEdit:weakself.isEdit];
+                if (weakself.accounModel.pictureUrlList.count==1) {
+                    [NSString modifyMemberType:3 value:[NSString getNullStr:weakself.accounModel.pictureUrlList[0]]];
+                }
+            }else{
+                [DZNetwork hintNetwork:data[@"desc"]];
+                if (weakself.accounModel.pictureUrlList.count==1) {
+                    [NSString modifyMemberType:3 value:[NSString getNullStr:weakself.accounModel.pictureUrlList[0]]];
+                }
+            }
+        } failure:^(NSError *error) {
+            NSLog(@"%@",error);
+        }];
+    }
+}
+
+- (void)actionSheetCancel:(WXActionSheet *)actionSheet {
+}
+
 -(SDCycleScrollView *)headScrollView{
     if (!_headScrollView) {
         _headScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, dzScreen_width,dzScreen_width) delegate:self placeholderImage:dzImageNamed(@"banner_default")];

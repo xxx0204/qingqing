@@ -79,7 +79,7 @@
     password_tf.secureTextEntry=YES;
     password_tf.font = dzFont(16);
     password_tf.textColor=DZColorFromRGB(0x888888);
-    password_tf.keyboardType = UIKeyboardTypeNumberPad;
+//    password_tf.keyboardType = UIKeyboardTypeNumberPad;
     [bgView addSubview:password_tf];
 }
 -(void)BtnClick{

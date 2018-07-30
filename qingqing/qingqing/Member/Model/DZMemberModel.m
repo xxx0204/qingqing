@@ -3,6 +3,8 @@
 //
 
 #import "DZMemberModel.h"
+#import <MJExtension.h>
+
 @implementation DZMemberModel
 
 

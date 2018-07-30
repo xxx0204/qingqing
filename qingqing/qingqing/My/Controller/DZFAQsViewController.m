@@ -80,6 +80,7 @@
                 NSLog(@"%@",filteredArray);
                 if (filteredArray.count>0) {
                     [weakself.dataArray removeObjectAtIndex:i];
+                    i--;
                 }
             }
             [weakself.tableV reloadData];
