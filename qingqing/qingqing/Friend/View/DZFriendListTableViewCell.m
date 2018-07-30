@@ -58,6 +58,16 @@
         [self.contentView addSubview:lineV];
         lineV.backgroundColor = DZColorFromRGB(0xF3F3F3);
         self.lineV = lineV;
+        
+        UILabel *unReadNumLabel = [UILabel new];
+        [self.contentView addSubview:unReadNumLabel];
+        unReadNumLabel.backgroundColor = DZColorFromRGB(0xEB5A68);
+        unReadNumLabel.font=dzFont(13);
+        unReadNumLabel.textColor=[UIColor whiteColor];
+        unReadNumLabel.textAlignment = NSTextAlignmentCenter;
+        unReadNumLabel.layer.cornerRadius = 7.5f;
+        unReadNumLabel.clipsToBounds = YES;
+        self.unReadNumLabel = unReadNumLabel;
     }
     return self;
 }
@@ -88,6 +98,12 @@
         }
     }else{
         self.infopL.text=@"";
+    }
+    if (self.rcconVerMode.unreadMessageCount > 0) {
+        self.unReadNumLabel.hidden = NO;
+        self.unReadNumLabel.text = [NSString stringWithFormat:@"%ld", (long)self.rcconVerMode.unreadMessageCount];
+    } else {
+        self.unReadNumLabel.hidden = YES;
     }
 }
 - (void)layoutSubviews{
@@ -130,6 +146,8 @@
     self.infopL.frame=CGRectMake(self.infopL.left, CGRectGetMaxY(self.describeL.frame)+2.5,self.infopL.width, self.infopL.height);
     
     self.lineV.frame=CGRectMake(15, self.height-0.5, self.width-30, 0.5);
+    
+    self.unReadNumLabel.frame = CGRectMake(0 + self.width - 40, 20, 20, 15);
 }
 
 - (void)awakeFromNib {

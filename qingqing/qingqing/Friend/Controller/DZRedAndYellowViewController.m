@@ -8,6 +8,7 @@
 
 #import "DZRedAndYellowViewController.h"
 #import "DZChatViewController.h"
+#import "DZInfoViewController.h"
 
 @interface DZRedAndYellowViewController ()
 
@@ -51,6 +52,9 @@
     headImageV.clipsToBounds=YES;
     headImageV.contentMode=UIViewContentModeScaleAspectFill;
     [headImageV sd_setImageWithURL:[NSURL URLWithString:[NSString picUrlPath:self.dz_GM_M.headPicUrl]] placeholderImage:dzImageNamed(@"default_head")];
+    headImageV.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoUserInfo:)];
+    [headImageV addGestureRecognizer:tap];
     [bgView addSubview:headImageV];
     
     if (self.dz_GM_M.type==1) {
@@ -177,6 +181,14 @@
         }
     }
 }
+
+- (void)gotoUserInfo:(UITapGestureRecognizer *)tap {
+    DZInfoViewController *dz_I_VC=[DZInfoViewController new];
+    dz_I_VC.isEdit=NO;
+    dz_I_VC.userId=self.dz_GM_M.accountId;
+    [self.navigationController pushViewController:dz_I_VC animated:YES];
+}
+
 -(void)btnClick:(UIButton *)btn{
     if (btn.tag==100) {
         DZChatViewController *conversationVC = [[DZChatViewController alloc]init];

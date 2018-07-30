@@ -85,7 +85,8 @@
         for (int j=0; j<count; j++) {
             UIImageView *iconImageV=[[UIImageView alloc] init];
             iconImageV.frame=CGRectMake(10+j*((imageV.width-30)/3+5), 15, (imageV.width-30)/3, (imageV.width-30)/3*630/378);
-            iconImageV.layer.cornerRadius=5;
+            iconImageV.layer.cornerRadius=5.0f;
+            iconImageV.clipsToBounds = YES;
             NSString *imgUrl = [NSString picUrlPath:accountM.pictureUrlList[j]];
             imgUrl = [imgUrl stringByReplacingOccurrencesOfString:@".jpeg" withString:@"_long.jpeg"];
             imgUrl = [imgUrl stringByReplacingOccurrencesOfString:@".jpg" withString:@"_long.jpg"];
