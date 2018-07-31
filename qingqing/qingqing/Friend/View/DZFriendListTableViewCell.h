@@ -14,7 +14,7 @@
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 
 @property(nonatomic,strong)UIImageView *iconImageV;
-@property(nonatomic,strong)UILabel *titleL,*describeL,*infopL;
+@property(nonatomic,strong)UILabel *titleL,*describeL,*infopL,*unReadNumLabel;
 @property(nonatomic,strong)UIView *lineV;
 @property(nonatomic,strong)DZGMModel *model;
 @property(nonatomic,strong)RCConversation *rcconVerMode;

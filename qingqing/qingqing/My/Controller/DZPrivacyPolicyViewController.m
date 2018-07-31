@@ -97,11 +97,24 @@
             }else if (indexPath.row==1){
                 [[RCIM sharedRCIM] setDisableMessageAlertSound:swich.on];
             }
+            [self hint];
         }
         
     };
         return cell;
 }
+
+- (void)hint {
+    [EasyTextView showText:@"设置成功" config:^EasyTextConfig *{
+        EasyTextConfig *config = [EasyTextConfig shared];
+        config.bgColor = [UIColor lightGrayColor] ;
+        config.shadowColor = [UIColor clearColor] ;
+        config.animationType = TextAnimationTypeFade;
+        config.statusType = TextStatusTypeBottom ;
+        return config ;
+    }];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

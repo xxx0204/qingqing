@@ -152,6 +152,7 @@
 		86FF97EF20DDE5E500961BB1 /* DZInfoEditOneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 86FF97ED20DDE5E500961BB1 /* DZInfoEditOneTableViewCell.m */; };
 		86FF97F220DDF08C00961BB1 /* DZInfoEditOneAddTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 86FF97F120DDF08C00961BB1 /* DZInfoEditOneAddTableViewCell.m */; };
 		86FF97F520DDF48000961BB1 /* DZInfoEditTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86FF97F420DDF48000961BB1 /* DZInfoEditTwoViewController.m */; };
+		D5E018F8210F4B2C00B5CBB7 /* WXActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = D5E018F7210F4B2C00B5CBB7 /* WXActionSheet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -465,6 +466,8 @@
 		86FF97F420DDF48000961BB1 /* DZInfoEditTwoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DZInfoEditTwoViewController.m; sourceTree = "<group>"; };
 		8E2EA385AF523A6F923763FB /* libPods-qingqing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-qingqing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFB5E905C44203722D2F3E9D /* Pods-qingqing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-qingqing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-qingqing/Pods-qingqing.debug.xcconfig"; sourceTree = "<group>"; };
+		D5E018F6210F4B2C00B5CBB7 /* WXActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXActionSheet.h; sourceTree = "<group>"; };
+		D5E018F7210F4B2C00B5CBB7 /* WXActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXActionSheet.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -982,6 +985,7 @@
 		868C783120918C24005EC9AE /* Encapsulation */ = {
 			isa = PBXGroup;
 			children = (
+				D5E018F5210F4B0A00B5CBB7 /* Actionsheet */,
 				861AD53F20F0A529007DA18E /* ChinaCityList */,
 				864D8B9720EF8B6B009EE452 /* LJContactManager */,
 				86F754DC20EB9A5000B1E9D0 /* ALiImageReshape */,
@@ -1214,6 +1218,15 @@
 				86F754E220EB9A5000B1E9D0 /* ALiImageShapeView.h */,
 			);
 			path = ALiImageReshape;
+			sourceTree = "<group>";
+		};
+		D5E018F5210F4B0A00B5CBB7 /* Actionsheet */ = {
+			isa = PBXGroup;
+			children = (
+				D5E018F6210F4B2C00B5CBB7 /* WXActionSheet.h */,
+				D5E018F7210F4B2C00B5CBB7 /* WXActionSheet.m */,
+			);
+			path = Actionsheet;
 			sourceTree = "<group>";
 		};
 		FAB2A544D2EC3E162CEF7AFC /* Frameworks */ = {
@@ -1513,6 +1526,7 @@
 				86298ECF20AB2B14005E2499 /* NSMutableArray+AvoidCrash.m in Sources */,
 				86FF97F220DDF08C00961BB1 /* DZInfoEditOneAddTableViewCell.m in Sources */,
 				864D8B9120EF7A8C009EE452 /* DZSetNewPasswordViewController.m in Sources */,
+				D5E018F8210F4B2C00B5CBB7 /* WXActionSheet.m in Sources */,
 				86CDD62F2092C34C001ECC19 /* DZNetworkHelper.m in Sources */,
 				86E6F82120A9D50E001F2B84 /* DZMyViewController.m in Sources */,
 				86298ED420AB2B14005E2499 /* NSString+AvoidCrash.m in Sources */,

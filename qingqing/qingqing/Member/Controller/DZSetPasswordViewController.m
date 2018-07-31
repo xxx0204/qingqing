@@ -76,16 +76,17 @@
 }
 -(void)BtnClick{
     [password_tf resignFirstResponder];//verifyType  2  用旧密码  verifyPara 旧密码
-    [DZNetwork post_ph:post_setPassword np:@{@"verifyType":@(1),@"loginname":self.phoneNumS,@"newPassword":password_tf.text,@"verifyPara":self.mobileCodeS} class:nil success:^(id data) {
+    [DZNetwork post_ph:post_setPassword np:@{@"verifyType":@(1),@"loginname":self.phoneNumS,@"newPassword":password_tf.text,@"verifyPara":self.mobileCodeS} class:[DZMemberModel class] success:^(DZMemberModel *data) {
         NSLog(@"%@",data);
-        if ([data[@"resultCode"] integerValue]==0) {
+        if (data.resultCode == 0) {
+            [NSString saveMember:data];
             CustomDialogView *dialog = [[CustomDialogView alloc]initWithTitle:@"新密码设置成功" message:@"开启您的qingqing吧" buttonTitles:@"好", nil];
             [dialog showWithCompletion:^(NSInteger selectIndex) {
                 DZAppDelegate *appDelegate = (DZAppDelegate *) [[UIApplication sharedApplication] delegate];
                 [appDelegate logout];
             }];
         }else{
-            [DZNetwork hintNetwork:data[@"desc"]];
+            [DZNetwork hintNetwork:data.desc];
         }
     } failure:^(NSError *error) {
         NSLog(@"%@",error);

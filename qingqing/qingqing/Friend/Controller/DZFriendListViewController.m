@@ -105,6 +105,7 @@
     
     self.chatArray=[[[RCIMClient sharedRCIMClient] getConversationList:@[@(ConversationType_PRIVATE)]] mutableCopy];
     for (RCConversation *conversation in self.chatArray) {
+        NSLog(@"未读数：%ld", (long)conversation.unreadMessageCount);
         if ([conversation.objectName isEqualToString:@"RC:TxtMsg"]){//([conversation.objectName isMemberOfClass:[RCTextMessage class]]) {
             RCTextMessage *testMessage = (RCTextMessage *)conversation.lastestMessage;
             NSLog(@"会话类型：%lu，目标会话id：%@，内容：%@",(unsigned long)conversation.conversationType, conversation.targetId,testMessage.content);

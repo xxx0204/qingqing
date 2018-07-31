@@ -26,7 +26,7 @@
     if (self) {
         UILabel *titleL=[[UILabel alloc] init];
         titleL.font=dzFont(14);
-        titleL.text=@"喜羊羊灰太狼";
+        titleL.text=@"";
         titleL.textColor=DZColorFromRGB(0x979797);
         [self.contentView addSubview:titleL];
         self.titleL=titleL;

@@ -107,7 +107,9 @@
     [DZNetwork post_ph:post_sendVerifyCode np:@{@"phone":[NSString getNullStr:self.phoneNumS],@"codeType":@(self.countryType)} class:nil success:^(id data) {
         NSLog(@"%@",data);
         if ([data[@"resultCode"] integerValue]==0) {
-            [DZNetwork temporaryHintNetwork:[NSString stringWithFormat:@"验证码：%@",data[@"desc"]]];
+            if ([NSString getNullStr:data[@"desc"]].length) {
+                [DZNetwork temporaryHintNetwork:[NSString stringWithFormat:@"验证码：%@",data[@"desc"]]];
+            }
             weakself.countDownCode.enabled = NO;
             [weakself.countDownCode setTitleColor:dzRgba(0.83, 0.83, 0.83, 1) forState:UIControlStateNormal];
             [weakself.countDownCode startCountDownWithSecond:60];
