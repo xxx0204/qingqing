@@ -10,7 +10,7 @@
 #import <TPKeyboardAvoidingTableView.h>
 #import "DZEditBasicInfoTableViewCell.h"
 #import "GEBirthdaySelectViewController.h"
-
+#define NICK_NAME_LENGTH 11
 @interface DZEditBasicInfoViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)TPKeyboardAvoidingTableView *tableV;
 @property(nonatomic,strong)NSString *showBirthdayS;
@@ -109,12 +109,12 @@
     }
     dzWeakSelf(self);
     cell.nicknameBlock = ^(NSString *desS) {
-        if (!(desS.length > 20)) {
+        if (!(desS.length > NICK_NAME_LENGTH)) {
             weakself.nicknameS=desS;
         } else {
-            weakself.nicknameS=[desS substringToIndex:20];
+            weakself.nicknameS=[desS substringToIndex:NICK_NAME_LENGTH];
             [tableView reloadData];
-            [EasyTextView showText:@"昵称长度不能超过20个字符" config:^EasyTextConfig *{
+            [EasyTextView showText:[NSString stringWithFormat:@"昵称长度不能超过%ld个字符", NICK_NAME_LENGTH] config:^EasyTextConfig *{
                 EasyTextConfig *config = [EasyTextConfig shared];
                 config.bgColor = [UIColor lightGrayColor];
                 config.shadowColor = [UIColor clearColor];

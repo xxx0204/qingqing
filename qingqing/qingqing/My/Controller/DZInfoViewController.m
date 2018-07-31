@@ -598,7 +598,7 @@
     if (isEdit) {
         for (int i=0; i<6; i++) {
             UIButton *imageBtn=[UIButton buttonWithType:UIButtonTypeCustom];
-UIImageView *imageView = [[UIImageView alloc] init];
+            UIImageView *imageView = [[UIImageView alloc] init];
             imageBtn.backgroundColor=DZColorFromRGB(0xEBEBEB);
             imageView.backgroundColor = DZColorFromRGB(0xEBEBEB);
             imageBtn.tag=2000+i;
