@@ -153,7 +153,8 @@
         [actionSheet addAction:action3];
         
         //相当于之前的[actionSheet show];
-        [self presentViewController:actionSheet animated:YES completion:nil];
+        //性别不可编辑
+//        [self presentViewController:actionSheet animated:YES completion:nil];
     }
     if (indexPath.row==2) {
         dzWeakSelf(self);
