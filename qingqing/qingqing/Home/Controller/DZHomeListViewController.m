@@ -29,6 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationChange:) name:@"locationChange" object:nil];
     // Do any additional setup after loading the view.
     self.allCards = [NSMutableArray array];
     self.sourceObject = [NSMutableArray array];
@@ -46,6 +47,14 @@
     [self addCards];
     [self getLocation];
 }
+
+- (void)locationChange:(NSNotification *)noti {
+    CLLocation *location = (CLLocation *)noti.object;
+    self.lat=location.coordinate.latitude;
+    self.lng=location.coordinate.longitude;
+    [self getData:YES];
+}
+
 -(void)btnRefresh{
     [self getData:YES];
 }
@@ -180,6 +189,12 @@
         }
     }else{
         cardView.hidden=YES;//如果没有数据则隐藏卡片
+        for (UIView *vi in self.view.subviews) {
+            if ([vi isKindOfClass:[JLDragCardView class]]) {
+                [vi removeFromSuperview];
+            }
+        }
+        [self.view layoutSubviews];
     }
     for (int i = 0; i<CARD_NUM; i++) {
         JLDragCardView*draggableView=[_allCards objectAtIndex:i];

@@ -82,7 +82,7 @@
     _dict=dict;
     self.slider.selectedMinimum = [dict[@"min"] integerValue];
     self.slider.selectedMaximum = [dict[@"max"] integerValue];
-    self.describeL.text=[NSString stringWithFormat:@"%.f-%.f",self.slider.minValue,self.slider.maxValue];
+    self.describeL.text=[NSString stringWithFormat:@"%.f-%.f",self.slider.selectedMinimum,self.slider.selectedMaximum];
 
 }
 - (void)awakeFromNib {

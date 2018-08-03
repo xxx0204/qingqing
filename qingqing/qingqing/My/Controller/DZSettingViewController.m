@@ -41,6 +41,7 @@
     dzWeakSelf(self);
     self.locationS=@"获取中...";
     [[SYCLLocation shareLocation] locationStart:^(CLLocation *location, CLPlacemark *placemark) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"locationChange" object:location];
         NSString *administrativeArea = placemark.administrativeArea;
         NSString *cityStr=placemark.locality;
         if (!administrativeArea) {

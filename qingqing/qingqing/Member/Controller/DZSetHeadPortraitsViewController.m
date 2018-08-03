@@ -204,6 +204,20 @@
     dzWeakSelf(self);
     if (self.frameTypeI==1) {
         [DZNetwork hintNetwork:@"调用上传照片接口"];
+        dzWeakSelf(self);
+        [DZNetwork up_ph:post_uploadPicture np:@{@"upPic":[NSString convertToJSONData:@{@"orderNumber":@1}]} im:self.headImage progress:^(NSProgress *progress) {
+            NSLog(@"%@",progress);
+        } success:^(id data) {
+            if ([[data objectForKey:@"resultCode"] integerValue]==0) {
+                [NSString saveMember:data];
+                DZAppDelegate *appDelegate = (DZAppDelegate *) [[UIApplication sharedApplication] delegate];
+                [appDelegate logout];
+            }else{
+                [DZNetwork hintNetwork:[data objectForKey:@"desc"]];
+            }
+        } failure:^(NSError *error) {
+            NSLog(@"%@",error);
+        }];
     }else{
         NSLog(@"%@",@{@"loginname":[NSString getNullStr:self.phoneNumS],@"password":[NSString getNullStr:self.passwordS],@"nickname":[NSString getNullStr:self.nicknameS],@"birthDate":[NSString getNullStr:self.birthDateS],@"sex":@(self.sexS),@"mobilecode":[NSString getNullStr:self.mobileCodeS]});
         [DZNetwork up_ph:post_register np:@{@"registerData":[NSString convertToJSONData:@{@"loginname":[NSString getNullStr:self.phoneNumS],@"password":[NSString getNullStr:self.passwordS],@"nickname":[NSString getNullStr:self.nicknameS],@"birthDate":[NSString getNullStr:self.birthDateS],@"sex":@(self.sexS),@"mobilecode":[NSString getNullStr:self.mobileCodeS]}]} im:weakself.headImage progress:^(NSProgress *progress) {
