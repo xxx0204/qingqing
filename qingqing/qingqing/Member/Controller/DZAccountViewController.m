@@ -129,10 +129,7 @@
     [textField setSelectedTextRange:[textField textRangeFromPosition:targetPostion toPosition:targetPostion]];
     
     if ([phoneNumberWithoutSpaces length]>=11&&textField.text.length==13){
-        NSString *regex = @"^((13[0-9])|(14[0-9])|(15[0-9])|(17[0-9])|(18[0-9]))\\d{8}$";
-        NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-        BOOL isMatch = [pred evaluateWithObject:phoneNumberWithoutSpaces];
-        if (isMatch) {
+        if ([phoneNumberWithoutSpaces hasPrefix:@"1"]) {
             _hintBtn.enabled=YES;
             _hintBtn.selected=YES;
         } else {
