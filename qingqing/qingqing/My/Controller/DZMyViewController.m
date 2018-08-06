@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title=@"我的";
+    self.title=@"详细资料";
     self.view.backgroundColor=dzRgba(0.96, 0.96, 0.96, 1);
     UIImage *image=dzImageNamed(@"head_bg");
     UIImageView *headImageV=[[UIImageView alloc]init];
