@@ -58,8 +58,14 @@
     //设置最小日期值
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSTimeInterval  oneDay = 24*60*60*(365*18+5);  //至今满18岁的日期 +5为闰年数
+    NSDate*nowDate = [NSDate date];
+    NSDate* maxDate = [nowDate initWithTimeIntervalSinceNow:-oneDay];
+    
     NSDate *minDate = [dateFormatter dateFromString:@"1900-01-01"];
     [self.datePicker setMinimumDate:minDate];
+    [self.datePicker setMaximumDate:maxDate];
     //设置时区
 //    NSLocale *locale=[[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
 //    [self.datePicker setLocale:locale];

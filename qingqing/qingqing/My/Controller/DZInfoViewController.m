@@ -39,11 +39,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title=@"我的";
-    
-    [self getLocation];
-    
     [self.view addSubview:self.tableV];
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self getLocation];
+}
+
 -(void)getLocation{
     // 封装方法 开启定位
     dzWeakSelf(self);
