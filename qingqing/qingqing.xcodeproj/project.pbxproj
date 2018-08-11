@@ -1742,10 +1742,10 @@
 				INFOPLIST_FILE = qingqing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.doukui.dk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "69c18a28-b95f-461f-9db9-398214aa3663";
-				PROVISIONING_PROFILE_SPECIFIER = com_chanjet_teamwork_dev_99;
+				PROVISIONING_PROFILE = "b2352aef-ac38-44dc-aefc-d8e090154a1f";
+				PROVISIONING_PROFILE_SPECIFIER = com_chanjet_goodbusiness_dev_99;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1763,10 +1763,10 @@
 				INFOPLIST_FILE = qingqing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.doukui.dk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "69c18a28-b95f-461f-9db9-398214aa3663";
-				PROVISIONING_PROFILE_SPECIFIER = com_chanjet_teamwork_dev_99;
+				PROVISIONING_PROFILE = "b2352aef-ac38-44dc-aefc-d8e090154a1f";
+				PROVISIONING_PROFILE_SPECIFIER = com_chanjet_goodbusiness_dev_99;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

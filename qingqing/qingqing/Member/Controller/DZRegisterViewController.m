@@ -131,18 +131,29 @@
 }
 -(void)BtnClick{
     [self.view endEditing:YES];
-    UITextField *textF=(UITextField *)[self.view viewWithTag:1001];
-    UITextField *textF1=(UITextField *)[self.view viewWithTag:1002];
-    UITextField *textF2=(UITextField *)[self.view viewWithTag:1003];
-    
-    DZSetHeadPortraitsViewController *dz_SHP_VC=[DZSetHeadPortraitsViewController new];
-    dz_SHP_VC.phoneNumS=self.phoneNumS;
-    dz_SHP_VC.passwordS=textF2.text;
-    dz_SHP_VC.nicknameS=textF.text;
-    dz_SHP_VC.birthDateS=textF1.text;
-    dz_SHP_VC.sexS=_sexS;
-    dz_SHP_VC.mobileCodeS=self.mobileCodeS;
-    [self.navigationController pushViewController:dz_SHP_VC animated:YES];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"注册成功后性别不可修改，请确认您的选择" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction *destructAction = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDestructive) handler:^(UIAlertAction * _Nonnull action) {
+        UITextField *textF=(UITextField *)[self.view viewWithTag:1001];
+        UITextField *textF1=(UITextField *)[self.view viewWithTag:1002];
+        UITextField *textF2=(UITextField *)[self.view viewWithTag:1003];
+        
+        DZSetHeadPortraitsViewController *dz_SHP_VC=[DZSetHeadPortraitsViewController new];
+        dz_SHP_VC.phoneNumS=self.phoneNumS;
+        dz_SHP_VC.passwordS=textF2.text;
+        dz_SHP_VC.nicknameS=textF.text;
+        dz_SHP_VC.birthDateS=textF1.text;
+        dz_SHP_VC.sexS=_sexS;
+        dz_SHP_VC.mobileCodeS=self.mobileCodeS;
+        [self.navigationController pushViewController:dz_SHP_VC animated:YES];
+    }];
+    [alert addAction:cancelAction];
+    [alert addAction:destructAction];
+    [self presentViewController:alert animated:YES completion:^{
+        
+    }];
 }
 -(void)btnUI{
     UITextField *textF=(UITextField *)[self.view viewWithTag:1001];

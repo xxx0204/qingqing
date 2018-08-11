@@ -204,7 +204,6 @@
     dzWeakSelf(self);
     if (self.frameTypeI==1) {
         [DZNetwork hintNetwork:@"调用上传照片接口"];
-        dzWeakSelf(self);
         [DZNetwork up_ph:post_uploadPicture np:@{@"upPic":[NSString convertToJSONData:@{@"orderNumber":@1}]} im:self.headImage progress:^(NSProgress *progress) {
             NSLog(@"%@",progress);
         } success:^(id data) {

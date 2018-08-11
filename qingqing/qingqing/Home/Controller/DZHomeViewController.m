@@ -16,7 +16,9 @@
 
 
 @interface DZHomeViewController ()
-
+{
+    UIView *firstLuanchView;
+}
 @end
 
 @implementation DZHomeViewController
@@ -41,10 +43,122 @@
         [self.navigationController pushViewController:dz_ray_vc animated:YES];
     }
 }
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
+
+- (void)isFirstLuanch {
+    BOOL isStartedApp = [[NSUserDefaults standardUserDefaults] boolForKey:@"isStartedApp"];
+    if (!isStartedApp) {//没有启动过
+        NSLog(@"没有启动过");
+//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isStartedApp"];
+        firstLuanchView = [[UIView alloc] init];
+        firstLuanchView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7f];
+        [[UIApplication sharedApplication].keyWindow addSubview:firstLuanchView];
+        [firstLuanchView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo([UIApplication sharedApplication].keyWindow);
+        }];
+        
+        UILabel *titleLabel = [[UILabel alloc] init];
+        titleLabel.text = @"特别功能";
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        titleLabel.font = [UIFont systemFontOfSize:20.0f];
+        titleLabel.textColor = [UIColor whiteColor];
+        [firstLuanchView addSubview:titleLabel];
+        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(firstLuanchView.centerX);
+            make.top.equalTo(firstLuanchView.mas_top).offset(127);
+            make.height.mas_equalTo(28);
+            make.width.mas_equalTo(100);
+        }];
+
+        UILabel *contentLabel = [[UILabel alloc] init];
+        contentLabel.text = @"屏蔽联系人：你的手机通讯录的联系人\n将不会看到你，你也看不到他们哦。";
+        contentLabel.textColor = [UIColor whiteColor];
+        contentLabel.textAlignment = NSTextAlignmentCenter;
+        contentLabel.font = [UIFont systemFontOfSize:18.0f];
+        contentLabel.numberOfLines = 0;
+        [firstLuanchView addSubview:contentLabel];
+        [contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(titleLabel.mas_bottom).offset(14);
+            make.centerX.mas_equalTo(titleLabel.centerX);
+            make.left.equalTo(firstLuanchView.mas_left).offset(0);
+            make.right.equalTo(firstLuanchView.mas_right).offset(0);
+            make.height.mas_greaterThanOrEqualTo(50);
+        }];
+        
+        UIImageView *contractImgV = [[UIImageView alloc] init];
+        contractImgV.image = dzImageNamed(@"contract");
+        [firstLuanchView addSubview:contractImgV];
+        [contractImgV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(contentLabel.mas_bottom).offset(64);
+            make.centerX.mas_equalTo(contentLabel.centerX);
+            make.width.mas_equalTo(100);
+            make.height.mas_equalTo(106);
+        }];
+        
+        UIView *openContractView = [[UIView alloc] init];
+        openContractView.backgroundColor = [[UIColor clearColor] colorWithAlphaComponent:0.0f];
+        [firstLuanchView addSubview:openContractView];
+        [openContractView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(contractImgV.mas_bottom).offset(98);
+            make.centerX.mas_equalTo(contractImgV.centerX);
+            make.height.mas_equalTo(25);
+            make.width.mas_equalTo(150);
+        }];
+        
+        UILabel *openContractLabel = [[UILabel alloc] init];
+        openContractLabel.text = @"开启屏蔽联系人";
+        openContractLabel.textColor = [UIColor whiteColor];
+        [openContractView addSubview:openContractLabel];
+        [openContractLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.and.top.and.bottom.equalTo(openContractView);
+            make.width.mas_equalTo(125);
+        }];
+        
+        UIButton *openContractBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+        [openContractBtn setBackgroundImage:dzImageNamed(@"rect") forState:(UIControlStateNormal)];
+        [openContractBtn setBackgroundImage:dzImageNamed(@"rect") forState:(UIControlStateHighlighted)];
+        [openContractBtn setImage:nil forState:(UIControlStateNormal)];
+        [openContractBtn setImage:dzImageNamed(@"select") forState:(UIControlStateSelected)];
+        openContractBtn.selected = YES;
+        [openContractBtn addTarget:self action:@selector(openContractBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
+        [openContractView addSubview:openContractBtn];
+        [openContractBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(openContractView.mas_right).offset(-3);
+            make.width.mas_equalTo(16);
+            make.height.mas_equalTo(16);
+            make.centerY.mas_equalTo(openContractLabel.centerY);
+        }];
+        
+        UIButton *startAppBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+        [startAppBtn setTitle:@"开始情情" forState:UIControlStateNormal];
+        [startAppBtn setBackgroundImage:dzImageNamed(@"btn_bg_h") forState:UIControlStateNormal];
+        startAppBtn.titleLabel.font=dzFont(16);
+        [startAppBtn setBackgroundImage:dzImageNamed(@"btn_bg_h") forState:UIControlStateSelected];
+        [startAppBtn setBackgroundImage:dzImageNamed(@"btn_bg_h") forState:UIControlStateHighlighted];
+        [startAppBtn addTarget:self action:@selector(startBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [startAppBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [firstLuanchView addSubview:startAppBtn];
+        [startAppBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(openContractView.mas_bottom).offset(30);
+            make.height.mas_equalTo(60);
+            make.left.equalTo(firstLuanchView.mas_left).offset(27);
+            make.right.equalTo(firstLuanchView.mas_right).offset(-27);
+        }];
+    }
+}
+
+- (void)openContractBtnClick:(UIButton *)btn {
+    btn.selected = !btn.selected;
+}
+
+- (void)startBtnClick:(UIButton *)btn {
+    [btn.superview removeFromSuperview];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -98,6 +212,8 @@
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     //    self.navigationItem.rightBarButtonItem = backButton;
     self.navigationItem.rightBarButtonItems=@[negativeSpacer,rightButton];
+    
+    [self isFirstLuanch];
 }
 -(void)getIntoMy{
     [self.navigationController pushViewController:[DZMyViewController new] animated:YES];

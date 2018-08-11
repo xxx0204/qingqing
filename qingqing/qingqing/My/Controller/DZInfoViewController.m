@@ -628,7 +628,7 @@
             }
             if (self.accounModel.pictureUrlList.count>=i+1) {
 //                [imageBtn sd_setImageWithURL:[NSURL URLWithString:[NSString picUrlPath:self.accounModel.pictureUrlList[i]]] forState:UIControlStateNormal placeholderImage:dzImageNamed(@"default_head")];
-                [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString picUrlPath:self.accounModel.pictureUrlList[i]]] placeholderImage:dzImageNamed(@"default_head")];
+                [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString picUrlPath:self.accounModel.pictureUrlList[i]]] placeholderImage:nil];
                 imageBtn.backgroundColor = UIColor.clearColor;
                 imageView.hidden = NO;
             }else{

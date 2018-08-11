@@ -102,6 +102,7 @@
     tableView.layer.masksToBounds = YES;
     tableView.rowHeight = ksCellHeight;
     tableView.bounces = NO;
+    tableView.scrollEnabled = NO;
     [bottomView addSubview:tableView];
     
     UIButton * cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
